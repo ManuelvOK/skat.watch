@@ -3,6 +3,10 @@
     height: 100%;
 }
 
+h3 {
+    margin-top: 0;
+}
+
 .dialog_wrapper {
     display: none;
     position: absolute;
@@ -14,12 +18,20 @@
 }
 
 .dialog {
+    position: relative;
+    width: 96%;
+    height: 96%;
+    top: 2%;
+    left: 2%;
     display: none;
-    margin: auto;
 }
 
 .dialog .close {
-    float:right;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 20pt;
+    font-weight: bold;
 }
 
 .dialog .close:after {
@@ -30,20 +42,54 @@
     display: none;
 }
 
+.dialog .sub_dialog .choices {
+    display: flex;
+    align-content: space-around;
+    flex-wrap: wrap;
+}
+
+.dialog .sub_dialog .choices div {
+    border: solid black 1px;
+    min-width: 15%;
+    height: 15%;
+    margin: 2%;
+    background-color: #999999;
+    text-align: center;
+}
+
+.dialog .sub_dialog label {
+    font-size: 20pt;
+}
+
+.dialog .sub_dialog input[type=radio] {
+    display: none;
+}
+
+.dialog .sub_dialog input[type=checkbox] {
+    display: none;
+}
+
+.dialog .sub_dialog input:checked + label {
+    font-weight: bold;
+}
+
+.dialog .button {
+    position: absolute;
+    height: 10%;
+    width: 30%;
+    bottom: 0;
+}
+
 .dialog .nextbutton {
-    float: right;
+    right: 0;
 }
 
 .dialog .submitbutton {
     display: none;
-    float: right;
+    right: 0;
 }
 
 .dialog .prevbutton {
     display: none;
-    float: left;
-}
-
-.dialog:after {
-    clear: both;
+    left: 0;
 }

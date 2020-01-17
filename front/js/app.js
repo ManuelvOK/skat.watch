@@ -39,13 +39,11 @@ let open_add_game_dialog = function(e) {
     sub_dialogs[0].style.display = 'block';
 }
 
-let add_game_dialog_next = function(e) {
-    e.stopPropagation();
+let add_game_dialog_next = function() {
     add_game_dialog_change_relative(1);
 }
 
-let add_game_dialog_previous = function(e) {
-    e.stopPropagation();
+let add_game_dialog_previous = function() {
     add_game_dialog_change_relative(-1);
 }
 
@@ -61,4 +59,37 @@ let add_game_dialog_change_relative = function(direction) {
     prevbutton.style.display = add_game_dialog_state === 0 ? 'none' : 'inline';
     nextbutton.style.display = add_game_dialog_state === sub_dialogs.length - 1 ? 'none' : 'inline';
     submitbutton.style.display = add_game_dialog_state === sub_dialogs.length - 1 ? 'inline' : 'none';
+}
+
+let submit_add_game_dialog = function() {
+    if (check_add_game_dialog()) {
+        document.forms["add_game"].submit();
+        return;
+    }
+    let button = document.getElementById("add_game_dialog").getElementsByClassName("submitbutton")[0];
+    button.style.color='red';
+    setTimeout(function() {
+        button.style.color = '';
+    }, 2000);
+}
+
+let check_add_game_dialog = function() {
+    let form = document.forms["add_game"];
+    if (form["player"].value === '') {
+        return false;
+    }
+    if (form["win"].value === '') {
+        return false;
+    }
+    if (form["jack"].value === '') {
+        return false;
+    }
+    if (form["color"].value === '') {
+        return false;
+    }
+    return true;
+}
+
+let new_player = function() {
+    document.getElementById("player_new").checked = true;
 }
