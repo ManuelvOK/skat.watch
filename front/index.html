@@ -1,0 +1,77 @@
+<html>
+<head>
+<script src="js/app.js"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<title>
+    skat.watch
+</title>
+</head>
+<body>
+<header>
+
+</header>
+
+<nav>
+    <ul>
+        <li onclick="open_add_player_dialog()">Spieler eintragen</li>
+        <li onclick="open_create_match_dialog()">Match anlegen</li>
+        <li onclick="open_add_game_dialog()">Spiel eintragen</li>
+    </ul>
+</nav>
+
+<main>
+    <div class="dialog_wrapper">
+        <div class="dialog" id="add_player_dialog">
+            add_player
+        </div>
+        <div class="dialog" id="create_match_dialog">
+            create_match
+        </div>
+        <div class="dialog" id="add_game_dialog">
+            <h3>Spiel eintragen</h3>
+            <div class="sub_dialog" id="player_choice">
+                <h5>Spieler</h5>
+                <input type="radio" name="player" onclick="add_game_dialog_next()" value="alice"> Alice
+                <input type="radio" name="player" onclick="add_game_dialog_next()" onclick="add_game_dialog_next()" value="bob"> Bob
+                <input type="radio" name="player" onclick="add_game_dialog_next()" onclick="add_game_dialog_next()" onclick="add_game_dialog_next()" value="mallory"> Mallory
+            </div>
+            <div class="sub_dialog" id="win_choiceonclick="add_game_dialog_next()" onclick="add_game_dialog_next()" onclick="add_game_dialog_next()" ">
+                <h5>Spielausgang</h5>
+                <input type="radio" name="win" onconclick="add_game_dialog_next()" onclick="add_game_dialog_next()" lick="add_game_dialog_next()" value="win">Gewonnen
+                <input type="radio" name="win" onconclick="add_game_dialog_next()" lick="add_game_dialog_next()" onclick="add_game_dialog_next()" value="loose">Verloren
+            </div>
+            <div class="sub_dialog" id="jack_choice">
+                <h5>Unter auf der Hand</h5>
+                <input type="checkbox" value="schell"> Schell
+                <input type="checkbox" value="herz"> Herz
+                <input type="checkbox" value="blatt"> Blatt
+                <input type="checkbox" value="eichel"> Eichel
+            </div>
+            <div class="sub_dialog" id="color_choice">
+                <h5>Gespielte Farbe</h5>
+                <input type="radio" name="color" onclick="add_game_dialog_next()" value="schell"> Schell
+                <input type="radio" name="color" onclick="add_game_dialog_next()" value="herz"> Herz
+                <input type="radio" name="color" onclick="add_game_dialog_next()" value="blatt"> Blatt
+                <input type="radio" name="color" onclick="add_game_dialog_next()" value="eichel"> Eichel
+                <input type="radio" name="color" onclick="add_game_dialog_next()" value="grand"> Grand
+                <input type="radio" name="color" onclick="add_game_dialog_next()" value="null"> Null
+            </div>
+            <div class="sub_dialog" id="mod_choice">
+                <h5>Spielmodifikationen</h5>
+                <input type="checkbox" value="hand"> Hand
+                <input type="checkbox" value="ouvert"> Ouvert
+                <input type="checkbox" value="schneider"> Schneider
+                <input type="checkbox" value="schwarz"> Schwarz
+            </div>
+            <input class="nextbutton" type="button" value="Weiter" onclick="add_game_dialog_next()">
+            <input class="submitbutton" type="button" value="Absenden" onclick="add_game_dialog_next()">
+            <input class="prevbutton" type="button" value="Zurück" onclick="add_game_dialog_previous()">
+        </div>
+    </div>
+</main>
+
+<footer>
+
+</footer>
+</body>
+</html>

@@ -1,0 +1,28 @@
+.dialog_wrapper {
+    position: absolute;
+    background-color: #eeeeee;
+    top: 20px;
+    width: 80%;
+    left: 10%;
+}
+
+.dialog {
+    display: none;
+    margin: auto;
+}
+
+.dialog .sub_dialog {
+    display: none;
+}
+
+.dialog .nextbutton {
+    float: right;
+}
+
+.dialog .prevbutton {
+    display: none;
+    float: left;
+}
+.dialog ::after {
+    clear: both;
+}
