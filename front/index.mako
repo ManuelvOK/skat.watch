@@ -169,10 +169,10 @@
             <th>Spieler</th>
             <th>Punkte</th>
         </tr>
-        % for score_item in scores:
+        % for player, score in scores.items():
         <tr>
-            <td>${score_item["player"]}</td>
-            <td>${score_item["score"]}</td>
+            <td>${player}</td>
+            <td>${score}</td>
         </tr>
         % endfor
     </table>

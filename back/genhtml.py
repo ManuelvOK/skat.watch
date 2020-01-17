@@ -33,15 +33,11 @@ def points(game):
     return (spiel + mod) * colour
 
 def compute_scores(games):
-    for player_name, player_games in itertools.groupby(
-            games,
-            key=lambda game: game["player"]
-    ):
-        score = sum(
-            int(points(game["game"])) * {0: -2, 1: 1}[int(game["win"])]
-            for game in player_games
-        )
-        yield {"player": player_name, "score": score}
+    scores = {}
+    for game in games:
+        score = points(game["game"]) * (-2, 1)[int(game["win"])]
+        scores[game["player"]] = scores.get(game["player"], 0) + score
+    return scores
 
 def genhtml(templatefile, scores):
     template = Template(filename=templatefile, input_encoding='utf-8')
