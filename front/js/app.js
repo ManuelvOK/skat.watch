@@ -5,22 +5,33 @@ let close_dialog_boxes = function() {
     for (let dialog of dialogs) {
         dialog.style.display = 'none';
     }
+    let dialog_wrapper = document.getElementsByClassName("dialog_wrapper")[0];
+    dialog_wrapper.style.display = 'none';
 }
 
-let open_add_player_dialog = function() {
+let open_add_player_dialog = function(e) {
+    e.stopPropagation();
     close_dialog_boxes();
+    let dialog_wrapper = document.getElementsByClassName("dialog_wrapper")[0];
+    dialog_wrapper.style.display = 'block';
     let dialog = document.getElementById("add_player_dialog");
     dialog.style.display = 'block';
 }
 
-let open_create_match_dialog = function() {
+let open_create_match_dialog = function(e) {
+    e.stopPropagation();
     close_dialog_boxes();
+    let dialog_wrapper = document.getElementsByClassName("dialog_wrapper")[0];
+    dialog_wrapper.style.display = 'block';
     let dialog = document.getElementById("create_match_dialog");
     dialog.style.display = 'block';
 }
 
-let open_add_game_dialog = function() {
+let open_add_game_dialog = function(e) {
+    e.stopPropagation();
     close_dialog_boxes();
+    let dialog_wrapper = document.getElementsByClassName("dialog_wrapper")[0];
+    dialog_wrapper.style.display = 'block';
     let dialog = document.getElementById("add_game_dialog");
     dialog.style.display = 'block';
     let sub_dialogs = dialog.getElementsByClassName("sub_dialog");
@@ -28,11 +39,13 @@ let open_add_game_dialog = function() {
     sub_dialogs[0].style.display = 'block';
 }
 
-let add_game_dialog_next = function() {
+let add_game_dialog_next = function(e) {
+    e.stopPropagation();
     add_game_dialog_change_relative(1);
 }
 
-let add_game_dialog_previous = function() {
+let add_game_dialog_previous = function(e) {
+    e.stopPropagation();
     add_game_dialog_change_relative(-1);
 }
 

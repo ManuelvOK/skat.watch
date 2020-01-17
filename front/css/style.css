@@ -1,14 +1,29 @@
+.body {
+    width: 100%;
+    height: 100%;
+}
+
 .dialog_wrapper {
+    display: none;
     position: absolute;
     background-color: #eeeeee;
-    top: 20px;
     width: 80%;
+    height: 80%;
+    top: 10%;
     left: 10%;
 }
 
 .dialog {
     display: none;
     margin: auto;
+}
+
+.dialog .close {
+    float:right;
+}
+
+.dialog .close:after {
+    clear:right;
 }
 
 .dialog .sub_dialog {
@@ -19,10 +34,16 @@
     float: right;
 }
 
+.dialog .submitbutton {
+    display: none;
+    float: right;
+}
+
 .dialog .prevbutton {
     display: none;
     float: left;
 }
-.dialog ::after {
+
+.dialog:after {
     clear: both;
 }
