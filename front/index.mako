@@ -170,10 +170,10 @@
             <th>Punkte</th>
         </tr>
         % for score_item in scores:
-            <tr>
-                <td>${score_item["player"]}</td>
-                <td>${score_item["score"]}</td>
-            </tr>
+        <tr>
+            <td>${score_item["player"]}</td>
+            <td>${score_item["score"]}</td>
+        </tr>
         % endfor
     </table>
 </main>
