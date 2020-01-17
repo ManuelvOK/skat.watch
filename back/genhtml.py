@@ -44,8 +44,8 @@ def compute_scores(games):
         yield {"player": player_name, "score": score}
 
 def genhtml(templatefile, scores):
-    template = Template(filename=templatefile)
-    return template.render(scores)
+    template = Template(filename=templatefile, input_encoding='utf-8')
+    return template.render(scores=scores)
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:

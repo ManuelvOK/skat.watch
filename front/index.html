@@ -166,25 +166,15 @@
     </div>
     <table>
         <tr>
-            <th>Datum</th>
-            <th>Uhrzeit</th>
             <th>Spieler</th>
-            <th>Spielausgang</th>
-            <th>Unter auf der Hand</th>
-            <th>Farbe</th>
-            <th>Spielmodifikationen</th>
             <th>Punkte</th>
         </tr>
-        <tr>
-            <td>17.01.2020</td>
-            <td>19:20 Uhr</td>
-            <td>Alice</td>
-            <td>Win</td>
-            <td>Mit 4</td>
-            <td>Grand</td>
-            <td>Schneider</td>
-            <td>360</td>
-        </tr>
+        % for score_item in scores:
+            <tr>
+                <td>${score_item["player"]}</td>
+                <td>${score_item["score"]}</td>
+            </tr>
+        % endfor
     </table>
 </main>
 
