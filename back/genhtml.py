@@ -3,6 +3,7 @@ import re
 import sys
 
 from mako.template import Template
+import itertools
 
 def read_games(csv):
     for line in csv:
