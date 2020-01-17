@@ -161,8 +161,8 @@
                 <input class="button nextbutton" type="button" value="Weiter" onclick="add_game_dialog_next();">
                 <input class="button submitbutton" type="button" value="Absenden" onclick="submit_add_game_dialog()">
                 <input class="button prevbutton" type="button" value="Zurück" onclick="add_game_dialog_previous()">
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
     <table>
         <tr>
