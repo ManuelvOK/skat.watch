@@ -53,8 +53,9 @@ def run(html, js, css, csv):
     S.JS = js
     S.CSS = css
     S.CSV = csv
-    with socketserver.TCPServer(("", 8000), S) as httpd:
-         httpd.serve_forever()
+    httpd = socketserver.TCPServer(("", 8000), S)
+    httpd.serve_forever()
+    httpd.server_close()
 
 if __name__ == "__main__":
     from sys import argv
