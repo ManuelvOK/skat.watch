@@ -74,36 +74,36 @@
                     <h5>Unter auf der Hand</h5>
                     <div class="choices">
                         <div>
-                            <input type="radio" name="jack" value="-1" id="jack-1" onclick="add_game_dialog_next();">
+                            <input type="radio" name="jack" value="O1" id="jack-1" onclick="add_game_dialog_next();">
                             <label for="jack-1">Ohne 1</label>
                         </div>
                         <div>
-                            <input type="radio" name="jack" value="-2" id="jack-2" onclick="add_game_dialog_next();">
+                            <input type="radio" name="jack" value="O2" id="jack-2" onclick="add_game_dialog_next();">
                             <label for="jack-2">Ohne 2</label>
                         </div>
                         <div>
-                            <input type="radio" name="jack" value="-3" id="jack-3" onclick="add_game_dialog_next();">
+                            <input type="radio" name="jack" value="O3" id="jack-3" onclick="add_game_dialog_next();">
                             <label for="jack-3">Ohne 3</label>
                         </div>
                         <div>
-                            <input type="radio" name="jack" value="-4" id="jack-4" onclick="add_game_dialog_next();">
+                            <input type="radio" name="jack" value="O4" id="jack-4" onclick="add_game_dialog_next();">
                             <label for="jack-4">Ohne 4</label>
                         </div>
                         <br>
                         <div>
-                            <input type="radio" name="jack" value="1" id="jack1" onclick="add_game_dialog_next();">
+                            <input type="radio" name="jack" value="M1" id="jack1" onclick="add_game_dialog_next();">
                             <label for="jack1">Mit 1</label>
                         </div>
                         <div>
-                            <input type="radio" name="jack" value="2" id="jack2" onclick="add_game_dialog_next();">
+                            <input type="radio" name="jack" value="M2" id="jack2" onclick="add_game_dialog_next();">
                             <label for="jack2">Mit 2</label>
                         </div>
                         <div>
-                            <input type="radio" name="jack" value="3" id="jack3" onclick="add_game_dialog_next();">
+                            <input type="radio" name="jack" value="M3" id="jack3" onclick="add_game_dialog_next();">
                             <label for="jack3">Mit 3</label>
                         </div>
                         <div>
-                            <input type="radio" name="jack" value="4" id="jack4" onclick="add_game_dialog_next();">
+                            <input type="radio" name="jack" value="M4" id="jack4" onclick="add_game_dialog_next();">
                             <label for="jack4">Mit 4</label>
                         </div>
                     </div>
@@ -112,23 +112,23 @@
                     <h5>Gespielte Farbe</h5>
                     <div class="choices">
                         <div>
-                            <input type="radio" name="color" onclick="add_game_dialog_next();" value="schell" id="color_schell">
+                            <input type="radio" name="color" onclick="add_game_dialog_next();" value="0" id="color_schell">
                             <label for="color_schell">Schell</label>
                         </div>
                         <div>
-                            <input type="radio" name="color" onclick="add_game_dialog_next();" value="herz" id="color_herz">
+                            <input type="radio" name="color" onclick="add_game_dialog_next();" value="1" id="color_herz">
                             <label for="color_herz">Herz</label>
                         </div>
                         <div>
-                            <input type="radio" name="color" onclick="add_game_dialog_next();" value="blatt" id="color_blatt">
+                            <input type="radio" name="color" onclick="add_game_dialog_next();" value="2" id="color_blatt">
                             <label for="color_blatt">Blatt</label>
                         </div>
                         <div>
-                            <input type="radio" name="color" onclick="add_game_dialog_next();" value="eichel" id="color_eichel">
+                            <input type="radio" name="color" onclick="add_game_dialog_next();" value="3" id="color_eichel">
                             <label for="color_eichel">Eichel</label>
                         </div>
                         <div>
-                            <input type="radio" name="color" onclick="add_game_dialog_next();" value="grand" id="color_grand">
+                            <input type="radio" name="color" onclick="add_game_dialog_next();" value="4" id="color_grand">
                             <label for="color_grand">Grand</label>
                         </div>
                         <div>
