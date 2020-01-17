@@ -9,7 +9,6 @@ def read_games(csv):
     for line in csv:
         try:
             timestamp, player, win, game = line[:-1].split(",")
-            print(timestamp, player, win, game)
         except ValueError as e:
             logger.warning("invalid line: " + line[:-1])
         yield { "timestamp": timestamp,
@@ -45,7 +44,7 @@ def genhtml(templatefile, scores):
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
-        print("usage: {} <games> <template>".format(sys.argv[0]))
+        print("usage: {} <games> <template>".format(sys.argv[0]), file=sys.stderr)
     logger = logging.getLogger()
     with open(sys.argv[1]) as gamesfile:
         games = read_games(gamesfile)
