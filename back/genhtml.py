@@ -46,7 +46,7 @@ if __name__ == "__main__":
     logger = logging.getLogger()
     with open(sys.argv[1]) as gamesfile:
         games = read_games(gamesfile)
-    scores = compute_scores(games)
-    with open(sys.argv[2]) as templatefile:
-        html = genhtml(templatefile, scores)
-    print(html)
+        scores = compute_scores(games)
+        with open(sys.argv[2]) as templatefile:
+            html = genhtml(templatefile, scores)
+        print(html)
