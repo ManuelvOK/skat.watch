@@ -40,7 +40,7 @@ def compute_scores(games):
 
 def genhtml(templatefile, scores):
     template = Template(filename=templatefile, input_encoding='utf-8')
-    return template.render(scores=scores)
+    return template.render(players=scores.keys(), scores=scores)
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:

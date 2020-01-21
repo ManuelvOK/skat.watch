@@ -39,18 +39,12 @@
                     <h5>Spieler</h5>
                     <div class="choices">
                         <!-- TODO: players list gows here -->
+                        % for player in players:
                         <div>
-                            <input type="radio" name="player" onclick="add_game_dialog_next();" value="alice" id="player_alice">
-                            <label for="player_alice">Alice</label>
+                            <input type="radio" name="player" onclick="add_game_dialog_next();" value="${player}" id=${"player_" + player}>
+                            <label for=${"player_" + player}>${player}</label>
                         </div>
-                        <div>
-                            <input type="radio" name="player" onclick="add_game_dialog_next();" value="bob" id="player_bob">
-                            <label for="player_bob">Bob</label>
-                        </div>
-                        <div>
-                            <input type="radio" name="player" onclick="add_game_dialog_next();" value="mallory" id="player_mallory">
-                            <label for="player_mallory">Mallory</label>
-                        </div>
+                        % endfor
                         <div>
                             <input type="radio" name="player" value="new" id="player_new">
                             <label for="player_new"><input type="text" name="new_player_name" onclick="new_player()"></label>

@@ -33,8 +33,11 @@ class S(BaseHTTPRequestHandler):
         content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
         post_data = self.rfile.read(content_length) # <--- Gets the data itself
         params = dict(parse.parse_qsl(post_data))
+        if any(x not in params for x in (b"player", b"win", b"jack", b"color")):
+            self.rebuff()
+            return
         timestamp = int(time.time())
-        player = params[b"player"].decode("UTF-8") if b"player" in params else params[b"new_player_name"].decode("UTF-8")
+        player = params[b"new_player_name"].decode("UTF-8") if b"new_player_name" in params else params[b"player"].decode("UTF-8")
         win = 1 if params[b"win"] == b"win" else 0
         jacks = params[b"jack"].decode("UTF-8")
         mode = "h"
@@ -47,6 +50,10 @@ class S(BaseHTTPRequestHandler):
         self.send_response(301)
         self.send_header('Location', 'http://skat.watch')
         self.end_headers()
+
+    def rebuff(self):
+        self.send_response(404)
+        self.send_headers()
 
 def run(html, js, css, csv):
     S.HTML = html
