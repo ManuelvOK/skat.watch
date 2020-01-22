@@ -12,15 +12,17 @@ class S(BaseHTTPRequestHandler):
 
     def do_GET(self):
         self.send_response(200)
-        self.send_header('Content-type', 'text/html')
         self.end_headers()
         if "js" in self.requestline:
+            self.send_header('Content-type', 'application/javascript')
             with open(self.JS, "rb") as f:
                 self.wfile.write(f.read())
         elif "css" in self.requestline:
+            self.send_header('Content-type', 'text/css')
             with open(self.CSS, "rb") as f:
                 self.wfile.write(f.read())
         else:
+            self.send_header('Content-type', 'text/html')
             with open(self.HTML, "rb") as f:
                 self.wfile.write(f.read())
 
