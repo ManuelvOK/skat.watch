@@ -34,17 +34,20 @@ class S(BaseHTTPRequestHandler):
     def do_POST(self):
         content_length = int(self.headers['Content-Length']) # <--- Gets the size of data
         post_data = self.rfile.read(content_length) # <--- Gets the data itself
-        params = dict(parse.parse_qsl(post_data))
-        if any(x not in params for x in (b"player", b"win", b"jack", b"color")):
-            self.rebuff()
+        params = stringify_dict(parse.parse_qsl(post_data))
+        if any(x not in params for x in ("player", "win", "jack", "color")):
+            self._rebuff()
             return
         timestamp = int(time.time())
-        player = params[b"new_player_name"].decode("UTF-8") if b"new_player_name" in params else params[b"player"].decode("UTF-8")
-        win = 1 if params[b"win"] == b"win" else 0
-        jacks = params[b"jack"].decode("UTF-8")
-        mode = "h"
-        color = params[b"color"].decode("UTF-8")
-        entry = (str(x) for x in (timestamp, player, win, jacks + mode + color))
+        player = params["new_player_name"] if "new_player_name" in params else params["player"]
+        win = 1 if params["win"] == "win" else 0
+        jacks = params["jack"]
+        game = ""
+        for mod in "tbhTBo":
+            if "mod_" + mod in params:
+                game += mod
+        color = params["color"] if jacks != "N" else ""
+        entry = (str(x) for x in (timestamp, player, win, jacks + color + game))
         with open(self.CSV, "a") as f:
             f.write(",".join(entry))
             f.write("\n")
@@ -53,9 +56,13 @@ class S(BaseHTTPRequestHandler):
         self.send_header('Location', 'http://skat.watch')
         self.end_headers()
 
-    def rebuff(self):
+    def _rebuff(self):
         self.send_response(404)
         self.send_headers()
+
+def stringify_dict(bytesdict):
+    return { k.decode("UTF-8"): v.decode("UTF-8")
+             for k, v in dict(bytesdict).items() }
 
 def run(html, js, css, csv):
     S.HTML = html

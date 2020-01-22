@@ -20,15 +20,15 @@ def points(game):
     # Get Null out of the way
     if game == "N":
         return 23
-    elif game == "NH":
+    elif game == "Nh":
         return 35
-    elif game == "NO":
+    elif game == "No":
         return 46
-    elif game == "NOH":
+    elif game == "Nho":
         return 59
     spiel = int(game[1]) + 1
-    mod = "tbhTBo".index(game[2]) + 1
-    colour = (9, 10, 11, 12, 24)[int(game[3])]
+    colour = (9, 10, 11, 12, 24)[int(game[2])]
+    mod = len(game[3:])
     return (spiel + mod) * colour
 
 def compute_scores(games):

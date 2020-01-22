@@ -38,7 +38,6 @@
                 <div class="sub_dialog" id="player_choice">
                     <h5>Spieler</h5>
                     <div class="choices">
-                        <!-- TODO: players list gows here -->
                         % for player in players:
                         <div>
                             <input type="radio" name="player" onclick="add_game_dialog_next();" value="${player}" id=${"player_" + player}>
@@ -100,6 +99,11 @@
                             <input type="radio" name="jack" value="M4" id="jack4" onclick="add_game_dialog_next();">
                             <label for="jack4">Mit 4</label>
                         </div>
+                        <div>
+                            <!-- TODO hier sollte woanders hingesprungen werden --!>
+                            <input type="radio" name="jack" value="N" id="jack_null" onclick="add_game_dialog_next();">
+                            <label for="jack_null">Null</label>
+                        </div>
                     </div>
                 </div>
                 <div class="sub_dialog" id="color_choice">
@@ -125,30 +129,34 @@
                             <input type="radio" name="color" onclick="add_game_dialog_next();" value="4" id="color_grand">
                             <label for="color_grand">Grand</label>
                         </div>
-                        <div>
-                            <input type="radio" name="color" onclick="add_game_dialog_next();" value="null" id="color_null">
-                            <label for="color_null">Null</label>
-                        </div>
                     </div>
                 </div>
                 <div class="sub_dialog" id="mod_choice">
                     <h5>Spielmodifikationen</h5>
                     <div class="choices">
                         <div>
-                            <input type="checkbox" value="hand" id="mod_hand">
-                            <label for="mod_hand">Hand</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" value="ouvert" id="mod_ouvert">
-                            <label for="mod_ouvert">Ouvert</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" value="schneider" id="mod_schneider">
+                            <input type="checkbox" name="mod_t" value="t" id="mod_schneider">
                             <label for="mod_schneider">Schneider</label>
                         </div>
                         <div>
-                            <input type="checkbox" value="schwarz" id="mod_schwarz">
+                            <input type="checkbox" name="mod_b" value="b" id="mod_schwarz">
                             <label for="mod_schwarz">Schwarz</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="mod_h" value="h" id="mod_hand">
+                            <label for="mod_hand">Hand</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="mod_T" value="T" id="mod_schneidera">
+                            <label for="mod_schneidera">Schneider angesagt</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="mod_B" value="B" id="mod_schwarza">
+                            <label for="mod_schwarza">Schwarz angesagt</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="mod_o" value="o" id="mod_ouvert">
+                            <label for="mod_ouvert">Ouvert</label>
                         </div>
                     </div>
                 </div>
