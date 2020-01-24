@@ -1,30 +1,34 @@
 from http.server import BaseHTTPRequestHandler
 import os
+import re
 import socketserver
 import time
 from urllib import parse
 
 class S(BaseHTTPRequestHandler):
     HTML = None
-    JS = None
-    CSS = None
     CSV = None
 
     def do_GET(self):
         self.send_response(200)
         self.end_headers()
-        if "js" in self.requestline:
-            self.send_header('Content-type', 'application/javascript')
-            with open(self.JS, "rb") as f:
-                self.wfile.write(f.read())
-        elif "css" in self.requestline:
-            self.send_header('Content-type', 'text/css')
-            with open(self.CSS, "rb") as f:
-                self.wfile.write(f.read())
-        else:
+        requested_file_match = re.search(
+                "static/(css|js|svg)/([0-9A-Za-z]*)\\.\\1",
+                self.requestline
+        )
+        if not requested_file_match:
             self.send_header('Content-type', 'text/html')
             with open(self.HTML, "rb") as f:
                 self.wfile.write(f.read())
+                return
+        file_path = requested_file_match.group()
+        extension = requested_file_match.group(1)
+        mime_type = { "css":    "text/css",
+                      "js":     "application/javascript",
+                      "svg":    "image/svg+css" }[extension]
+        self.send_header("Content-type", mime_type)
+        with open(file_path, "rb") as f:
+            self.wfile.write(f.read())
 
     def do_HEAD(self):
         self.send_response(200)
@@ -66,8 +70,6 @@ def stringify_dict(bytesdict):
 
 def run(html, js, css, csv):
     S.HTML = html
-    S.JS = js
-    S.CSS = css
     S.CSV = csv
     httpd = socketserver.TCPServer(("", 8000), S)
     httpd.serve_forever()

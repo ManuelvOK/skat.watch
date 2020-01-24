@@ -2,8 +2,10 @@
 
 GAMES = games.csv
 
-serve: front/index.html
-	python3 back/server.py $< front/js/app.js front/css/style.css $(GAMES)
+vpath %.mako view
+
+serve: index.html
+	python3 back/server.py $< static/js/app.js static/css/style.css $(GAMES)
 
 %.html: $(GAMES) %.mako
 	python3 back/genhtml.py $^ > $@

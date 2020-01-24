@@ -1,7 +1,7 @@
 <html onclick="close_dialog_boxes();">
 <head>
-<script src="js/app.js"></script>
-<link rel="stylesheet" type="text/css" href="css/style.css">
+<script src="static/js/app.js"></script>
+<link rel="stylesheet" type="text/css" href="static/css/style.css">
 <title>
     skat.watch
 </title>
