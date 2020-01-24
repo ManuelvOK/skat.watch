@@ -58,7 +58,7 @@ class S(BaseHTTPRequestHandler):
 
     def _rebuff(self):
         self.send_response(404)
-        self.send_headers()
+        self.end_headers()
 
 def stringify_dict(bytesdict):
     return { k.decode("UTF-8"): v.decode("UTF-8")
