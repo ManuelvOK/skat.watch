@@ -3,40 +3,40 @@ let add_game_dialog_state = 0;
 let close_dialog_boxes = function() {
     let dialogs = document.getElementsByClassName("dialog");
     for (let dialog of dialogs) {
-        dialog.style.display = 'none';
+        dialog.classList.remove("active");
     }
     let dialog_wrapper = document.getElementsByClassName("dialog_wrapper")[0];
-    dialog_wrapper.style.display = 'none';
+    dialog_wrapper.classList.remove("active");
 }
 
 let open_add_player_dialog = function(e) {
     e.stopPropagation();
     close_dialog_boxes();
     let dialog_wrapper = document.getElementsByClassName("dialog_wrapper")[0];
-    dialog_wrapper.style.display = 'block';
+    dialog_wrapper.classList.add("active");
     let dialog = document.getElementById("add_player_dialog");
-    dialog.style.display = 'block';
+    dialog.classList.add("active");
 }
 
 let open_create_match_dialog = function(e) {
     e.stopPropagation();
     close_dialog_boxes();
     let dialog_wrapper = document.getElementsByClassName("dialog_wrapper")[0];
-    dialog_wrapper.style.display = 'block';
+    dialog_wrapper.classList.add("active");
     let dialog = document.getElementById("create_match_dialog");
-    dialog.style.display = 'block';
+    dialog.classList.add("active");
 }
 
 let open_add_game_dialog = function(e) {
     e.stopPropagation();
     close_dialog_boxes();
     let dialog_wrapper = document.getElementsByClassName("dialog_wrapper")[0];
-    dialog_wrapper.style.display = 'block';
+    dialog_wrapper.classList.add("active");
     let dialog = document.getElementById("add_game_dialog");
-    dialog.style.display = 'block';
+    dialog.classList.add("active");
     let sub_dialogs = dialog.getElementsByClassName("sub_dialog");
     add_game_dialog_state = 0;
-    sub_dialogs[0].style.display = 'block';
+    sub_dialogs[0].classList.add("active");
 }
 
 let add_game_dialog_next = function() {
@@ -50,15 +50,15 @@ let add_game_dialog_previous = function() {
 let add_game_dialog_change_relative = function(direction) {
     let dialog = document.getElementById("add_game_dialog");
     let sub_dialogs = dialog.getElementsByClassName("sub_dialog");
-    sub_dialogs[add_game_dialog_state].style.display = 'none';
+    sub_dialogs[add_game_dialog_state].classList.remove("active");
     add_game_dialog_state += direction;
-    sub_dialogs[add_game_dialog_state].style.display = 'block';
+    sub_dialogs[add_game_dialog_state].classList.add("active");
     let prevbutton = dialog.getElementsByClassName("prevbutton")[0];
     let nextbutton = dialog.getElementsByClassName("nextbutton")[0];
     let submitbutton = dialog.getElementsByClassName("submitbutton")[0];
-    prevbutton.style.display = add_game_dialog_state === 0 ? 'none' : 'inline';
-    nextbutton.style.display = add_game_dialog_state === sub_dialogs.length - 1 ? 'none' : 'inline';
-    submitbutton.style.display = add_game_dialog_state === sub_dialogs.length - 1 ? 'inline' : 'none';
+    prevbutton.classList.toggle("active", add_game_dialog_state !== 0);
+    nextbutton.classList.toggle("active", add_game_dialog_state !== sub_dialogs.length - 1);
+    submitbutton.classList.toggle("active", add_game_dialog_state === sub_dialogs.length - 1);
 }
 
 let submit_add_game_dialog = function() {
@@ -67,9 +67,9 @@ let submit_add_game_dialog = function() {
         return;
     }
     let button = document.getElementById("add_game_dialog").getElementsByClassName("submitbutton")[0];
-    button.style.color='red';
+    button.classList.add("red");
     setTimeout(function() {
-        button.style.color = '';
+        button.classList.remove("red");
     }, 2000);
 }
 
