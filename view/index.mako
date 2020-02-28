@@ -171,7 +171,7 @@
             <th>Spieler</th>
             <th>Punkte</th>
         </tr>
-        % for player, score in scores.items():
+        % for player, score in sorted(scores.items(), key=lambda x: x[1], reverse=True):
         <tr>
             <td>${player}</td>
             <td>${score}</td>
