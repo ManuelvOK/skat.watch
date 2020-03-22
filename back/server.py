@@ -13,7 +13,6 @@ class S(BaseHTTPRequestHandler):
 
     def do_GET(self):
         self.send_response(200)
-        self.end_headers()
         requested_file_match = re.search(
                 "static/(css|js|svg)/([0-9A-Za-z]*)\\.\\1",
                 self.requestline
@@ -25,6 +24,7 @@ class S(BaseHTTPRequestHandler):
                         "js":     "application/javascript",
                         "svg":    "image/svg+css" }[extension]
             self.send_header("Content-type", mime_type)
+            self.end_headers()
             with open(file_path, "rb") as f:
                 self.wfile.write(f.read())
 
