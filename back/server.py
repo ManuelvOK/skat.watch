@@ -28,9 +28,9 @@ class S(BaseHTTPRequestHandler):
             with open(file_path, "rb") as f:
                 self.wfile.write(f.read())
 
-        self.send_header('Content-type', 'text/plain')
-        self.end_headers()
         if self.path.startswith("/quarantine"):
+            self.send_header('Content-type', 'text/plain')
+            self.end_headers()
             params = parse.parse_qs(parse.urlparse(self.path).query)
             try:
                 player = int(params["player"][0])
