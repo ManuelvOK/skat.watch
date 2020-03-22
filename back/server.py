@@ -5,6 +5,8 @@ import socketserver
 import time
 from urllib import parse
 
+import multiplayer
+
 class S(BaseHTTPRequestHandler):
     HTML = None
     CSV = None
@@ -16,19 +18,37 @@ class S(BaseHTTPRequestHandler):
                 "static/(css|js|svg)/([0-9A-Za-z]*)\\.\\1",
                 self.requestline
         )
-        if not requested_file_match:
-            self.send_header('Content-type', 'text/html')
-            with open(self.HTML, "rb") as f:
+        if requested_file_match:
+            file_path = requested_file_match.group()
+            extension = requested_file_match.group(1)
+            mime_type = { "css":    "text/css",
+                        "js":     "application/javascript",
+                        "svg":    "image/svg+css" }[extension]
+            self.send_header("Content-type", mime_type)
+            with open(file_path, "rb") as f:
                 self.wfile.write(f.read())
-                return
-        file_path = requested_file_match.group()
-        extension = requested_file_match.group(1)
-        mime_type = { "css":    "text/css",
-                      "js":     "application/javascript",
-                      "svg":    "image/svg+css" }[extension]
-        self.send_header("Content-type", mime_type)
-        with open(file_path, "rb") as f:
+
+        if self.path.startswith("/quarantine"):
+            params = parse.parse_qs(parse.urlparse(self.path).query)
+            try:
+                player = int(params["player"][0])
+            except (IndexError, KeyError, ValueError):
+                player = 3
+            if not player in range(0, 4):
+                player = 3
+            try:
+                seed = int(params["seed"][0])
+            except (IndexError, KeyError, ValueError):
+                seed = 1337
+            for card in multiplayer.get_hand(player, seed):
+                self.wfile.write(card.encode("latin1")+b"\n")
+            return
+
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
+        with open(self.HTML, "rb") as f:
             self.wfile.write(f.read())
+            return
 
     def do_HEAD(self):
         self.send_response(200)
