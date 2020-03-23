@@ -27,6 +27,7 @@ class S(BaseHTTPRequestHandler):
             self.end_headers()
             with open(file_path, "rb") as f:
                 self.wfile.write(f.read())
+            return
 
         if self.path.startswith("/quarantine"):
             self.send_header('Content-type', 'text/plain')
