@@ -140,7 +140,9 @@
                             </div>
                             <div>
                                 <input type="radio" name="color" onclick="add_game_dialog_next();" value="4" id="color_grand">
-                                <label for="color_grand">Grand</label>
+                                <label for="color_grand">Grand
+                                    <img src="static/svg/grand.svg" />
+                                </label>
                             </div>
                         </div>
                     </div>
