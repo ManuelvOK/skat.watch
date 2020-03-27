@@ -20,9 +20,9 @@ class S(BaseHTTPRequestHandler):
         if requested_file_match:
             file_path = requested_file_match.group()
             extension = requested_file_match.group(1)
-            mime_type = { "css":    "text/css",
-                        "js":     "application/javascript",
-                        "svg":    "image/svg+css" }[extension]
+            mime_type = {"css": "text/css",
+                         "js": "application/javascript",
+                         "svg": "image/svg+xml"}[extension]
             self.send_header("Content-type", mime_type)
             self.end_headers()
             with open(file_path, "rb") as f:
