@@ -23,7 +23,7 @@ total_card_count = color_count * value_count
 
 
 def get_card(card_id):
-    return f"{colors[card_id // value_count]} {values[card_id % value_count]}"
+    return "{color} {value}".format(color=colors[card_id // value_count], value=values[card_id % value_count])
 
 
 def get_hand(player, seed=1337):
