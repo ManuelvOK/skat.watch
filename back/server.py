@@ -94,6 +94,7 @@ def stringify_dict(bytesdict):
 def run(html, js, css, csv):
     S.HTML = html
     S.CSV = csv
+    socketserver.TCPServer.allow_reuse_address = True
     httpd = socketserver.TCPServer(("", 8000), S)
     httpd.serve_forever()
     httpd.server_close()
