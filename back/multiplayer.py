@@ -1,39 +1,37 @@
 import random
 
-cards = [ "Schell 7",
-          "Schell 8",
-          "Schell 9",
-          "Schell 10",
-          "Schell Unter",
-          "Schell Ober",
-          "Schell König",
-          "Schell Ass",
-          "Herz 7",
-          "Herz 8",
-          "Herz 9",
-          "Herz 10",
-          "Herz Unter",
-          "Herz Ober",
-          "Herz König",
-          "Herz Ass",
-          "Blatt 7",
-          "Blatt 8",
-          "Blatt 9",
-          "Blatt 10",
-          "Blatt Unter",
-          "Blatt Ober",
-          "Blatt König",
-          "Blatt Ass",
-          "Eichel 7",
-          "Eichel 8",
-          "Eichel 9",
-          "Eichel 10",
-          "Eichel Unter",
-          "Eichel Ober",
-          "Eichel König",
-          "Eichel Ass" ]
+colors = [
+    "Schell",
+    "Herz",
+    "Blatt",
+    "Eichel"
+]
+
+values = [
+    "7",
+    "8",
+    "9",
+    "10",
+    "Unter",
+    "Ober",
+    "König",
+    "Ass"
+]
+color_count = len(colors)
+value_count = len(values)
+total_card_count = color_count * value_count
+
+
+def get_card(card_id):
+    return f"{colors[card_id // value_count]} {values[card_id % value_count]}"
+
 
 def get_hand(player, seed=1337):
     random.seed(seed)
-    current_game_cards = random.sample(cards, k=len(cards))
-    return current_game_cards[player*10:player*10+10]
+    # Shuffled list of all card identifiers
+    current_game_cards = random.sample(range(total_card_count), k=total_card_count)
+
+    # Pick 10 cards for the specified player
+    player_cards = sorted(current_game_cards[player * 10:player * 10 + 10])
+
+    return [get_card(card_id) for card_id in player_cards]
