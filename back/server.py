@@ -47,8 +47,8 @@ class S(BaseHTTPRequestHandler):
                 self.wfile.write(card.encode("latin1")+b"\n")
             return
 
-        if self.path.startswith("/api"):
-            self.send_header('Content-type', 'text/plain')
+        if self.path.startswith("/games.csv"):
+            self.send_header('Content-type', 'text/csv')
             self.end_headers()
             with open("games.csv", "rb") as games:
                 self.wfile.write(games.read())
