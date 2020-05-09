@@ -4,7 +4,7 @@ import re
 import socketserver
 import time
 from urllib import parse
-from mako import Template
+from mako.template import Template
 
 import multiplayer
 
@@ -31,7 +31,7 @@ class S(BaseHTTPRequestHandler):
             return
 
         if self.path.startswith("/quarantine"):
-            self.send_header('Content-type', 'text/plain')
+            self.send_header('Content-type', 'text/html')
             self.end_headers()
             params = parse.parse_qs(parse.urlparse(self.path).query)
             try:
@@ -44,9 +44,9 @@ class S(BaseHTTPRequestHandler):
                 seed = int(params["seed"][0])
             except (IndexError, KeyError, ValueError):
                 seed = 1337
-            template = Template(filename='hand.mako', input_encoding='utf-8')
+            template = Template(filename='view/hand.mako', input_encoding='utf-8')
             rendered = template.render(cards=multiplayer.get_hand(player, seed))
-            self.wfile.write(rendered)
+            self.wfile.write(rendered.encode('UTF-8'))
             return
 
         if self.path.startswith("/games.csv"):
