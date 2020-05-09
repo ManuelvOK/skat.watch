@@ -4,6 +4,7 @@ import re
 import socketserver
 import time
 from urllib import parse
+from mako import Template
 
 import multiplayer
 
@@ -43,8 +44,9 @@ class S(BaseHTTPRequestHandler):
                 seed = int(params["seed"][0])
             except (IndexError, KeyError, ValueError):
                 seed = 1337
-            for card in multiplayer.get_hand(player, seed):
-                self.wfile.write(card.encode("latin1")+b"\n")
+            template = Template(filename='hand.mako', input_encoding='utf-8')
+            rendered = template.render(cards=multiplayer.get_hand(player, seed))
+            self.wfile.write(rendered)
             return
 
         if self.path.startswith("/games.csv"):
