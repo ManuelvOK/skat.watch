@@ -1,10 +1,10 @@
 import random
 
 colors = [
-    "Schell",
-    "Herz",
-    "Blatt",
-    "Eichel"
+    "schell",
+    "herz",
+    "blatt",
+    "eichel"
 ]
 
 values = [
@@ -12,10 +12,10 @@ values = [
     "8",
     "9",
     "10",
-    "Unter",
-    "Ober",
-    "König",
-    "Ass"
+    "U",
+    "O",
+    "K",
+    "A"
 ]
 color_count = len(colors)
 value_count = len(values)
@@ -23,7 +23,9 @@ total_card_count = color_count * value_count
 
 
 def get_card(card_id):
-    return "{color} {value}".format(color=colors[card_id // value_count], value=values[card_id % value_count])
+    color = colors[card_id // value_count]
+    value = values[card_id % value_count]
+    return color, value
 
 
 def get_hand(player, seed=1337):

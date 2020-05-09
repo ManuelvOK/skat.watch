@@ -11,6 +11,8 @@
 
     <title>skat.watch</title>
 </head>
+
+<body>
 <nav>
     <div class="container">
         <ul>
