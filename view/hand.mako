@@ -13,7 +13,7 @@
 <body>
 <main>
     <div class="hand_container">
-        % for color, value in cards
+        % for color, value in cards:
         <div class="card">
 	        <img class="card_image" src="static/svg/${color}.svg" />
             <div class="value">
