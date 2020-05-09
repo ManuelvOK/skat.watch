@@ -29,16 +29,3 @@
 </footer>
 </body>
 </html>
-
-<!--
-
-% for color, value in cards:
-<div class="card">
-    <img src="static/svg/${color}.svg" />
-    <div class="value">
-        ${value}
-    </div>
-</div>
-% endfor
-
--->
