@@ -34,6 +34,13 @@ class S(BaseHTTPRequestHandler):
             self.send_header('Content-type', 'text/html')
             self.end_headers()
             params = parse.parse_qs(parse.urlparse(self.path).query)
+            if 'game' in params:
+                game = int(params["game"][0])
+                template = Template(filename='view/game.mako', input_encoding='utf-8')
+                rendered = template.render(seed=game)
+                self.wfile.write(rendered.encode('UTF-8'))
+                return
+
             try:
                 player = int(params["player"][0])
             except (IndexError, KeyError, ValueError):
