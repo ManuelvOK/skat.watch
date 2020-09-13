@@ -4,8 +4,11 @@ GAMES = games.csv
 
 vpath %.mako view
 
-serve: index.html
-	python3 back/server.py $< static/js/app.js static/css/style.css $(GAMES)
+serve: index.html server
+	./server
+
+server:
+	go build back/server.go
 
 %.html: $(GAMES) %.mako
 	python3 back/genhtml.py $^ > $@

@@ -1,0 +1,54 @@
+<!doctype html>
+<html onclick="close_dialog_boxes();">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <script src="static/js/quarantine.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/css/quarantine.css">
+
+    <title>skat.watch</title>
+</head>
+
+<body>
+<main>
+    <div class="bubble" onclick="toggleView('player0')">
+        Vorhand
+        <ul id="player0">
+            {{range .Player0}}
+            <li>{{.}}</li>
+            {{end}}
+        </ul>
+    </div>
+    <div class="bubble" onclick="toggleView('player1')">
+        Mittelhand
+        <ul id="player1">
+            {{range .Player1}}
+            <li>{{.}}</li>
+            {{end}}
+        </ul>
+    </div>
+    <div class="bubble" onclick="toggleView('player2')">
+        Rückhand
+        <ul id="player2">
+            {{range .Player2}}
+            <li>{{.}}</li>
+            {{end}}
+        </ul>
+    </div>
+    <div class="bubble" onclick="toggleView('skat')">
+        Skat
+        <ul id="skat">
+            {{range .Skat}}
+            <li>{{.}}</li>
+            {{end}}
+        </ul>
+    </div>
+</main>
+
+<footer>
+
+</footer>
+</body>
+</html>

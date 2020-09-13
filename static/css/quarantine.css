@@ -1,0 +1,11 @@
+.bubble {
+    padding: 10px;
+    margin: 5px;
+    border: 2px black solid;
+    border-radius: 5px;
+    background-color: #DDD;
+}
+
+ul {
+    display: none;
+}
