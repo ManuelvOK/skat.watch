@@ -7,6 +7,17 @@
     --secondary-text-color: #505050;
     --button-hover-color: #f0f0f0
 }
+@media screen and (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #000;
+        --border-color: #333;
+        --text-color: #FFF;
+        --primary-color: #2980b9;
+        --primary-text-color: #FFF;
+        --secondary-text-color: #BBB;
+        --button-hover-color: #111
+    }
+}
 
 html, body {
     width: 100%;
@@ -54,7 +65,7 @@ nav button:hover {
 
 .dialog_wrapper {
     display: none;
-    position: absolute;
+    position: fixed;
     background-color: rgba(0,0,0,0.2);
 
     width: 100%;
@@ -69,8 +80,8 @@ nav button:hover {
 
 .dialog-window {
     position: absolute;
-    background-color: #FAFAFA;
-    border: solid 1px #333;
+    background-color: var(--bg-color);
+    border: solid 1px var(--border-color);
     border-radius: 0.2rem;
     box-shadow: 0 0.1rem 0.4rem rgba(0,0,0,0.3);
     left: 1rem;
@@ -88,7 +99,7 @@ nav button:hover {
 }
 
 .dialog-header{
-    border-bottom: solid 1px #ccc;
+    border-bottom: solid 1px var(--border-color);
     height: 2.5rem;
 }
 .dialog-header h3 {
