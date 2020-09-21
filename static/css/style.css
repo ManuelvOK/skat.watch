@@ -308,6 +308,7 @@ main > .container > span {
     padding: 1.5rem 1rem 0.5rem;
     display: block;
     font-weight: 500;
+    opacity: 0.6;
 }
 
 .container {
