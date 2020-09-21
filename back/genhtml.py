@@ -75,7 +75,7 @@ def compute_scores(games):
             old_score, old_total_score, weeks_not_played = scores[name]
             score_this_week, played_this_week = scores_in_week[name]
             new_score = old_score * old_score_factor + score_this_week * new_score_factor
-            new_total_score = old_score + score_this_week
+            new_total_score = old_total_score + score_this_week
             weeks_not_played = 0 if played_this_week else weeks_not_played + 1
             scores[name] = (new_score, new_total_score, weeks_not_played)
 
@@ -88,14 +88,14 @@ def genhtml(templatefile, scores):
     active_scores = dict()
     inactive_scores = dict()
     for name, tup in scores.items():
-        if tup[2] >= 4:
+        if tup[2] >= 13:
             inactive_scores[name] = tup
         else:
             active_scores[name] = tup
 
     # (name, rank, score, total_score)
     ranking = []
-    for i, entry in enumerate(sorted(active_scores.items(), key=lambda x: x[1][0])):
+    for i, entry in enumerate(sorted(active_scores.items(), key=lambda x: x[1][0], reverse=True)):
         name, tup = entry
         score, total_score, _ = tup
         ranking.append((name, i + 1, score, total_score))

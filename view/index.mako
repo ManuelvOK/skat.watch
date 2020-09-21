@@ -8,6 +8,7 @@
     <script src="static/js/app.js"></script>
 
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
+     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet"> 
 
     <title>skat.watch</title>
 </head>
@@ -15,13 +16,7 @@
 <body>
 <nav>
     <div class="container">
-        <ul>
-            <!--
-            <li onclick="open_add_player_dialog()">Spieler eintragen</li>
-            <li onclick="open_create_match_dialog()">Match anlegen</li>
-            -->
-            <li onclick="open_add_game_dialog(event);">Spiel eintragen</li>
-        </ul>
+        <button onclick="open_add_game_dialog(event);">Spiel eintragen</button>
     </div>
 </nav>
 
@@ -187,18 +182,39 @@
         </div>
     </div>
     <div class="container">
-        <table>
-            <tr>
-                <th>Spieler</th>
-                <th>Punkte</th>
-            </tr>
-            % for player, score in sorted(scores.items(), key=lambda x: x[1], reverse=True):
-            <tr>
-                <td>${player}</td>
-                <td>${round(score, 2)}</td>
-            </tr>
+        <ul>
+            % for name, rank, score, totalScore in ranking:
+            <li>
+                <div>
+                    <span class="rank">${"🏆" if rank == 1 else rank}</span>
+                </div>
+                <div>
+                    <span class="name">${name}</span>
+                    <span class="total-score">Gesamtpunktzahl: ${round(totalScore, 2)}</span>
+                </div>
+                <div>
+                    <span class="score">${round(score, 2)}</span>
+                </div>
+            </li>
             % endfor
-        </table>
+        </ul>
+        <span>Inaktive Spieler</span>
+        <ul>
+            % for name, totalScore in inactive_players:
+            <li>
+                <div>
+                    <span class="rank">-</span>
+                </div>
+                <div>
+                    <span class="name">${name}</span>
+                    <span class="total-score">Gesamtpunktzahl: ${round(totalScore, 2)}</span>
+                </div>
+                <div>
+                    <span class="score">-</span>
+                </div>
+            </li>
+            % endfor
+        </ul>
     </div>
 </main>
 
