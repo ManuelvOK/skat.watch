@@ -60,24 +60,53 @@ def compute_scores(games):
     games_grouped_by_week = {k: list(v) for k, v in itertools.groupby(
         games, key=lambda x: date.fromtimestamp(int(x["timestamp"])).isocalendar()[:2])}
 
-    scores = {name: 0 for name in all_players}
+    scores = {name: (0, 0, 0) for name in all_players}
 
     for year, week in all_weeks_in_years:
         games_in_week = games_grouped_by_week.get((year, week), [])
 
-        scores_in_week = {name: 0 for name in all_players}
+        scores_in_week = {name: (0, False) for name in all_players}
         for game in games_in_week:
             score = points(game["game"]) * (-2, 1)[int(game["win"])]
-            scores_in_week[game["player"]] += score
+            old_score_in_week, _ = scores_in_week[game["player"]]
+            scores_in_week[game["player"]] = (old_score_in_week + score, True)
 
         for name in all_players:
-            scores[name] = scores[name] * old_score_factor + scores_in_week[name] * new_score_factor
+            old_score, old_total_score, weeks_not_played = scores[name]
+            score_this_week, played_this_week = scores_in_week[name]
+            new_score = old_score * old_score_factor + score_this_week * new_score_factor
+            new_total_score = old_score + score_this_week
+            weeks_not_played = 0 if played_this_week else weeks_not_played + 1
+            scores[name] = (new_score, new_total_score, weeks_not_played)
 
     return scores
 
+
 def genhtml(templatefile, scores):
     template = Template(filename=templatefile, input_encoding='utf-8')
-    return template.render(players=scores.keys(), scores=scores)
+    # name: (score, total_score, weeks)
+    active_scores = dict()
+    inactive_scores = dict()
+    for name, tup in scores.items():
+        if tup[2] >= 4:
+            inactive_scores[name] = tup
+        else:
+            active_scores[name] = tup
+
+    # (name, rank, score, total_score)
+    ranking = []
+    for i, entry in enumerate(sorted(active_scores.items(), key=lambda x: x[1][0])):
+        name, tup = entry
+        score, total_score, _ = tup
+        ranking.append((name, i + 1, score, total_score))
+
+    inactive_players = []
+    for i, entry in enumerate(sorted(inactive_scores.items(), key=lambda x: x[1][2])):
+        name, tup = entry
+        score, total_score, _ = tup
+        inactive_players.append((name, total_score))
+
+    return template.render(players=scores.keys(), ranking=ranking, inactive_players=inactive_players)
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
