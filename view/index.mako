@@ -190,27 +190,28 @@
                 </div>
                 <div>
                     <span class="name">${name}</span>
-                    <span class="total-score">Gesamtpunktzahl: ${round(totalScore, 2)}</span>
+                    <span class="total-score">Gesamtpunktzahl: ${totalScore}</span>
                 </div>
                 <div>
-                    <span class="score">${round(score, 2)}</span>
+                    <span class="score">${score}</span>
                 </div>
             </li>
             % endfor
         </ul>
         <span>Inaktive Spieler</span>
-        <ul>
-            % for name, totalScore in inactive_players:
+        <ul class="inactive-players">
+            % for name, totalScore, week_string in inactive_players:
             <li>
                 <div>
                     <span class="rank">-</span>
                 </div>
                 <div>
                     <span class="name">${name}</span>
-                    <span class="total-score">Gesamtpunktzahl: ${round(totalScore, 2)}</span>
+                    <span class="total-score">Gesamtpunktzahl: ${totalScore}</span>
                 </div>
                 <div>
-                    <span class="score">-</span>
+                    <span class="text-inactive">inaktiv seit</span>
+                    <span class="time-inactive">${week_string}</span>
                 </div>
             </li>
             % endfor
