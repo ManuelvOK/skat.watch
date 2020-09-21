@@ -2,9 +2,10 @@
     --bg-color: #FAFAFA;
     --border-color: #ddd;
     --text-color: #282828;
-    --text-color: #282828;
     --primary-color: #2980b9;
     --primary-text-color: #FFF;
+    --secondary-text-color: #505050;
+    --button-hover-color: #f0f0f0
 }
 
 html, body {
@@ -44,6 +45,11 @@ nav button {
     font-size: 1.2rem;
     font-family: 'Roboto Mono', monospace;
     font-weight: 500;
+}
+
+nav button:hover {
+    background-color: var(--button-hover-color);
+    cursor: pointer;
 }
 
 .dialog_wrapper {
@@ -209,7 +215,7 @@ main li {
     margin: 0;
     list-style: none;
     display: flex;
-    height: 3.4rem;
+    min-height: 3.4rem;
     position: relative;
 }
 main li::after {
@@ -244,32 +250,53 @@ main li div:nth-child(3) {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 main li .rank {
-    font-weight: bold;
+    font-weight: 500;
     font-size: 1.5rem;
     width: 3rem;
     text-align: center;
 }
 main li .name {
-    font-weight: bold;
+    font-weight: 500;
     font-size: 1.1rem;
 }
 main li .total-score {
     font-size: 0.7rem;
+    color: var(--secondary-text-color);
     margin-top: -0.1rem;
 }
 main li .score {
-    font-weight: bold;
+    font-weight: 500;
     font-size: 1.2rem;
     text-align: right;
     padding-right: 1rem;
-    width: 6rem;
 }
+
+main li .text-inactive {
+    color: var(--secondary-text-color);
+    font-size: 0.75rem;
+    text-align: right;
+    padding-right: 1rem;
+}
+
+main li .time-inactive {
+    font-weight: 500;
+    font-size: 1rem;
+    text-align: right;
+    padding-right: 1rem;
+}
+
+.inactive-players {
+    opacity: 0.6;
+}
+
 main > .container > span {
     padding: 1.5rem 1rem 0.5rem;
     display: block;
+    font-weight: 500;
 }
 
 .container {
@@ -284,15 +311,5 @@ main > .container > span {
         left: 50%;
         width: 700px;
         margin-left: -350px;
-    }
-}
-@media (min-width: 992px) {
-    .container {
-        width: 900px;
-    }
-}
-@media (min-width: 1200px) {
-    .container {
-        width: 1100px;
     }
 }
