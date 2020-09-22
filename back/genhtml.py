@@ -41,52 +41,59 @@ def compute_scores(games):
     old_score_factor = 0.5
     new_score_factor = 1
 
-    # Get week of first game
+    # Get month of first game
     first_timestamp = date.fromtimestamp(int(games[0]["timestamp"]))
-    first_year, first_week = first_timestamp.isocalendar()[:2]
+    first_year = first_timestamp.year
+    first_month = first_timestamp.month
 
-    # Get current week
+    # Get current month
     current_timestamp = datetime.now()
-    current_year, current_week = current_timestamp.isocalendar()[:2]
 
-    # Get all weeks since the first game
+    current_year = current_timestamp.year
+    current_month = current_timestamp.month
+
+    # Get all months since the first game
     # [(2020, 1), (2020, 2), …]
-    all_weeks_in_years = []
+    all_months_in_years = []
     for year in range(first_year, current_year + 1):
-        start_week = first_week if year == first_year else 1
-        end_week = current_week if year == current_year else date(year, 12, 28).isocalendar()[1]
-        for week in range(start_week, end_week + 1):
-            all_weeks_in_years.append((year, week))
+        start_month = first_month if year == first_year else 1
+        end_month = current_month if year == current_year else 12
+        for month in range(start_month, end_month + 1):
+            all_months_in_years.append((year, month))
 
-    # Group all games by their week
+    # Group all games by their month
     # {(2020,1): [game_1, game_2], …}
-    games_grouped_by_week = {k: list(v) for k, v in itertools.groupby(
-        games, key=lambda x: date.fromtimestamp(int(x["timestamp"])).isocalendar()[:2])}
+    games_grouped_by_month = {k: list(v) for k, v in itertools.groupby(
+        games,
+        key=lambda x: (
+            date.fromtimestamp(int(x["timestamp"])).year,
+            date.fromtimestamp(int(x["timestamp"])).month
+        ))}
 
-    # {name: (score, total_score, weeks)}
+    # {name: (score, total_score, months)}
     scores = {name: (0, 0, 0) for name in all_players}
 
-    for year, week in all_weeks_in_years:
-        games_in_week = games_grouped_by_week.get((year, week), [])
+    for year, month in all_months_in_years:
+        games_in_month = games_grouped_by_month.get((year, month), [])
 
-        # {name: (score_this_week, played_this_week)}
-        scores_in_week = {name: (0, False) for name in all_players}
-        for game in games_in_week:
+        # {name: (score_this_month, played_this_month)}
+        scores_in_month = {name: (0, False) for name in all_players}
+        for game in games_in_month:
             score = points(game["game"]) * (-2, 1)[int(game["win"])]
-            old_score_in_week, _ = scores_in_week[game["player"]]
-            scores_in_week[game["player"]] = (old_score_in_week + score, True)
+            old_score_in_month, _ = scores_in_month[game["player"]]
+            scores_in_month[game["player"]] = (old_score_in_month + score, True)
 
         for name in all_players:
-            old_score, old_total_score, weeks_not_played = scores[name]
-            score_this_week, played_this_week = scores_in_week[name]
+            old_score, old_total_score, months_not_played = scores[name]
+            score_this_month, played_this_month = scores_in_month[name]
 
-            new_score = old_score * old_score_factor + score_this_week * new_score_factor
-            new_total_score = old_total_score + score_this_week
-            weeks_not_played = 0 if played_this_week else weeks_not_played + 1
+            new_score = old_score * old_score_factor + score_this_month * new_score_factor
+            new_total_score = old_total_score + score_this_month
+            months_not_played = 0 if played_this_month else months_not_played + 1
 
-            scores[name] = (new_score, new_total_score, weeks_not_played)
+            scores[name] = (new_score, new_total_score, months_not_played)
 
-    # {name: (score, total_score, weeks)}
+    # {name: (score, total_score, months)}
     return scores
 
 
@@ -94,7 +101,7 @@ def compute_ranking(scores):
     active_scores = dict()
     inactive_scores = dict()
     for name, value in scores.items():
-        if value[2] >= 13:
+        if value[2] > 3:
             inactive_scores[name] = value
         else:
             active_scores[name] = value
@@ -108,19 +115,13 @@ def compute_ranking(scores):
     inactive_players = []
     for i, entry in enumerate(sorted(inactive_scores.items(), key=lambda x: x[1][2])):
         name, value = entry
-        score, total_score, weeks = value
-        actual_weeks = weeks - 1
-        if actual_weeks == 1:
-            week_string = "1 Woche"
-        elif actual_weeks <= 4:
-            week_string = "{} Wochen".format(actual_weeks)
+        score, total_score, months = value
+        actual_months = months - 1
+        if actual_months == 1:
+            month_string = "1 Monat"
         else:
-            months = actual_weeks / (365 / 12 / 7)
-            if months == 1:
-                week_string = "1 Monat"
-            else:
-                week_string = "{} Monaten".format(int(months))
-        inactive_players.append((name, total_score, week_string))
+            month_string = "{} Monaten".format(actual_months)
+        inactive_players.append((name, total_score, month_string))
 
     # ranking: (name, rank, score, total_score)
     # inactive_players: (name, total_score, inactive_time_string)
