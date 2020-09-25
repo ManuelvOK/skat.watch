@@ -198,7 +198,7 @@ input[type=text], select {
     -moz-appearance: none;
     appearance: none;
     font-family: 'Roboto Mono', monospace;
-    color: var(--primary-text-color);
+    color: var(--text-color);
 }
 
 select:-moz-focusring {
@@ -274,9 +274,10 @@ h2 {
 .choices > div > input:checked ~ label::after {
     content: '';
     position: absolute;
-    left: 0.65rem;
-    top: 0.5rem;
+    left: 0.62rem;
+    top: 50%;
     width: 0.3rem;
+    margin-top: -0.45rem;
     height: 0.6rem;
     border-bottom: solid 0.15rem var(--bg-color);
     border-right: solid 0.15rem var(--bg-color);
@@ -289,4 +290,8 @@ h2 {
 
 .main-enter-game {
     padding: 0 1rem 1rem;
+}
+
+input[type=submit] {
+    margin-top: 1rem;
 }
