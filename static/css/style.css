@@ -286,6 +286,13 @@ h2 {
 
 .main-enter-game {
     padding: 0 1rem 1rem;
+    animation: fadein 100ms;
+}
+
+@keyframes fadein {
+    0% { visibility: hidden; }
+    99% { visibility: hidden; }
+    100% { visibility: visible; }
 }
 
 input[type=submit] {
