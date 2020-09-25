@@ -160,6 +160,7 @@ function updateModifiers(target) {
     }
 }
 
+var lastIndex = 0;
 function refreshState() {
     let verfiyList = [
         verifyPlayerChoise,
@@ -181,6 +182,13 @@ function refreshState() {
 
     for (let i=0; i < formPartList.length; i++) {
         formPartList[i].classList.toggle("hide", i > index);
+    }
+
+    if (index != lastIndex) {
+        lastIndex = index;
+        setTimeout(() => {
+            formPartList[index].scrollIntoView();
+        }, 1);
     }
 
     let jackList = document.getElementsByName("jack");
