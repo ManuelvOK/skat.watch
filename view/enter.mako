@@ -85,31 +85,31 @@
                     <div>
                         <input type="radio" name="color" value="0" id="color-schell" />
                         <label for="color-schell">Schell
-                            <img src="static/svg/schell.svg" />
+                            <div><img src="static/svg/schell.svg" /></div>
                         </label>
                     </div>
                     <div>
                         <input type="radio" name="color" value="1" id="color-herz" />
                         <label for="color-herz">Herz
-                            <img src="static/svg/herz.svg" />
+                            <div><img src="static/svg/herz.svg" /></div>
                         </label>
                     </div>
                     <div>
                         <input type="radio" name="color" value="2" id="color-blatt" />
                         <label for="color-blatt">Blatt
-                            <img src="static/svg/blatt.svg" />
+                            <div><img src="static/svg/blatt.svg" /></div>
                         </label>
                     </div>
                     <div>
                         <input type="radio" name="color" value="3" id="color-eichel" />
                         <label for="color-eichel">Eichel
-                            <img src="static/svg/eichel.svg" />
+                            <div><img src="static/svg/eichel.svg" /></div>
                         </label>
                     </div>
                     <div>
                         <input type="radio" name="color" value="4" id="color-grand" />
                         <label for="color-grand">Grand
-                            <img src="static/svg/grand.svg" />
+                            <div><img src="static/svg/grand.svg" /></div>
                         </label>
                     </div>
                 </div>
