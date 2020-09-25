@@ -131,7 +131,7 @@ def compute_ranking(scores):
 def genhtml(templatefile, scores):
     template = Template(filename=templatefile, input_encoding='utf-8')
     ranking, inactive_players = compute_ranking(scores)
-    return template.render(players=scores.keys(), ranking=ranking, inactive_players=inactive_players)
+    return template.render(players=sorted(scores.keys(), key=lambda x: x.lower()), ranking=ranking, inactive_players=inactive_players)
 
 
 if __name__ == "__main__":

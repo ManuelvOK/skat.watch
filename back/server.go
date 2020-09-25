@@ -13,6 +13,7 @@ import (
     "sort"
     "strconv"
     "time"
+    "strings"
 )
 
 var templates = template.Must(template.ParseFiles("view/quarantine.html"))
@@ -26,17 +27,27 @@ func viewHandler(w http.ResponseWriter, r *http.Request) {
         win := r.FormValue("win")
         jack := r.FormValue("jack")
         color := r.FormValue("color")
-        if player == "" || win == "" || jack == "" || color == "" {
+        hand := r.FormValue("hand")
+        if player == "" || win == "" || jack == "" {
             http.Error(w, "invalid form", http.StatusInternalServerError)
             return
         }
-        new_player_name := r.FormValue("new_player_name")
+        new_player_name := r.FormValue("new-player")
         if new_player_name != "" {
+            if strings.Contains(new_player_name, ",") {
+                http.Error(w, "invalid player name", http.StatusInternalServerError)
+                return
+            }
             player = new_player_name
+        } else {
+            player = player[7:]
         }
         game := ""
-        for _, mod := range "tbhTBo" {
-            mod_value := r.FormValue("mod_" + string(mod))
+        if hand == "yes" {
+            game += "h"
+        }
+        for _, mod := range "tbTBo" {
+            mod_value := r.FormValue("mod-" + string(mod))
             if mod_value != "" {
                 game += string(mod)
             }
@@ -67,8 +78,20 @@ func viewHandler(w http.ResponseWriter, r *http.Request) {
         if err != nil {
             http.Error(w, err.Error(), http.StatusInternalServerError)
         }
+        cmd2 := exec.Command("make", "enter.html")
+        err = cmd2.Run()
+        if err != nil {
+            http.Error(w, err.Error(), http.StatusInternalServerError)
+        }
     }
     p, _ := ioutil.ReadFile("index.html")
+    w.Header().Set("Content-Type", "text/html")
+    fmt.Fprintf(w, "%s", p)
+}
+
+func viewEnterHandler(w http.ResponseWriter, r *http.Request) {
+    p, _ := ioutil.ReadFile("enter.html")
+    w.Header().Set("Content-Type", "text/html")
     fmt.Fprintf(w, "%s", p)
 }
 
@@ -140,6 +163,7 @@ func serveAPI(w http.ResponseWriter, r *http.Request) {
 
 func main() {
     http.HandleFunc("/", viewHandler)
+    http.HandleFunc("/enter", viewEnterHandler)
     http.HandleFunc("/quarantine", quarantine)
     http.HandleFunc("/static/", serveStatic)
     http.HandleFunc("/api/", serveAPI)

@@ -2,3 +2,6 @@
 *.iml
 games.csv
 index.html
+enter.html
+__pycache__/
+server
