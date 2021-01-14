@@ -1,8 +1,9 @@
 :root {
-    --bg-color: #FAFAFA;
-    --border-color: #0000001f;
+    --bg-color: #FFFFFF;
+    --border-color: #ddd;
     --text-color: #000000cf;
-    --bubble-background-color: #e2e0df;
+    --bubble-background-color: #FFFFFF;
+    --bubble-hover-color: #f0f0f0;
     --card-background-color: #FFF7F0;
     --card-border-color: #0000007f;
     --card-text-color: #000000cf;
@@ -12,9 +13,10 @@
 @media screen and (prefers-color-scheme: dark) {
     :root {
         --bg-color: #000;
-        --border-color: #ffffff3f;
+        --border-color: #333;
         --text-color: #ffffff;
-        --bubble-background-color: #282727;
+        --bubble-background-color: #000000;
+        --bubble-hover-color: #111;
         --card-background-color: #484240;
         --card-border-color: #ffffff5f;
         --card-text-color: #ffffffcf;
@@ -35,30 +37,42 @@ html, body {
 }
 
 main {
-    max-width: 900px;
+    max-width: 700px;
+    padding: 1rem;
     text-align: left;
     margin: 0 auto;
 }
 
 .bubble {
-    padding: 0.2rem;
-    margin: 0.5rem;
+    min-height: 2rem;
+    margin: 0 0 1rem;
     border: 1px solid var(--border-color);
     border-radius: 0.4rem;
     background-color: var(--bubble-background-color);
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-flow: column nowrap;
     cursor: pointer;
+    padding: 1rem;
+
+}
+
+.bubble:hover {
+    background: var(--bubble-hover-color)
+
 }
 
 .bubble > span {
-    margin: 0.5rem 0.5rem 0.3rem;
+    margin: 0 0 0;
     font-size: 1.2rem;
-    font-weight: 500;
+    font-weight: 400;
+
 }
 
 .cards {
     display: none;
+    margin: 0.8rem 0 0;
 }
 
 .card {
