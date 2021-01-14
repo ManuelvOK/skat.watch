@@ -93,10 +93,15 @@ func serveStatic(w http.ResponseWriter, r *http.Request) {
 }
 
 type Hands struct {
-    Player0 []string
-    Player1 []string
-    Player2 []string
-    Skat []string
+    Player0 []Card
+    Player1 []Card
+    Player2 []Card
+    Skat []Card
+}
+
+type Card struct {
+     Color string
+     Value string
 }
 
 func quarantine(w http.ResponseWriter, r *http.Request) {
@@ -107,7 +112,7 @@ func quarantine(w http.ResponseWriter, r *http.Request) {
     sort.Ints(game_cards[10:20])
     sort.Ints(game_cards[20:30])
     sort.Ints(game_cards[30:])
-    cards := []string{}
+    cards := []Card{}
     for _, c := range game_cards {
         cards = append(cards, get_card(c))
     }
@@ -117,10 +122,10 @@ func quarantine(w http.ResponseWriter, r *http.Request) {
     }
 }
 
-func get_card(card_id int) string {
+func get_card(card_id int) Card {
     color := colors[card_id / len(values)]
     value := values[card_id % len(values)]
-    return color + " " + value
+    return Card{color, value}
 }
 
 func serveAPI(w http.ResponseWriter, r *http.Request) {
