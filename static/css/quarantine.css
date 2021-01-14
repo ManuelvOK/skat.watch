@@ -1,11 +1,57 @@
 .bubble {
-    padding: 10px;
-    margin: 5px;
+    padding: 0.2rem;
+    margin: 0.2rem;
     border: 2px black solid;
-    border-radius: 5px;
-    background-color: #DDD;
+    border-radius: 0.5rem;
+    background-color: #e2e0df;
+    display: flex;
+    flex-flow: column nowrap;
+    cursor: pointer;
 }
 
-ul {
+.bubble > span {
+    margin: 0.5rem 0.5rem 0.3rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.cards {
     display: none;
+}
+
+.card {
+    float: left;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+
+    font-size: 4rem;
+    width: 1.6em;
+    height: 2.4em;
+    margin: 0.2rem;
+    border: 0.03em solid black;
+    border-radius: 0.13em;
+    background-color: #FFF7F0;
+}
+
+@media only screen and (max-width: 600px) {
+    .card {
+        font-size: 3rem;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .card {
+        font-size: 2rem;
+    }
+}
+
+.card_image {
+    height: 1em;
+}
+
+.value {
+    line-height: 1;
+    height: 0.8em;
 }

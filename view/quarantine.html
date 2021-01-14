@@ -14,36 +14,48 @@
 <body>
 <main>
     <div class="bubble" onclick="toggleView('player0')">
-        Vorhand
-        <ul id="player0">
+        <span>Vorhand</span>
+        <div class="cards" id="player0">
             {{range .Player0}}
-            <li>{{.}}</li>
+                <div class="card">
+                    <img class="card_image" src="static/svg/{{.Color}}.svg" alt="{{.Color}}"/>
+                    <div class="value">{{.Value}}</div>
+                </div>
             {{end}}
-        </ul>
+        </div>
     </div>
     <div class="bubble" onclick="toggleView('player1')">
-        Mittelhand
-        <ul id="player1">
+        <span>Mittelhand</span>
+        <div class="cards" id="player1">
             {{range .Player1}}
-            <li>{{.}}</li>
+                <div class="card">
+                    <img class="card_image" src="static/svg/{{.Color}}.svg" alt="{{.Color}}"/>
+                    <div class="value">{{.Value}}</div>
+                </div>
             {{end}}
-        </ul>
+        </div>
     </div>
     <div class="bubble" onclick="toggleView('player2')">
-        Rückhand
-        <ul id="player2">
+        <span>Rückhand</span>
+        <div class="cards" id="player2">
             {{range .Player2}}
-            <li>{{.}}</li>
+                <div class="card">
+                    <img class="card_image" src="static/svg/{{.Color}}.svg" alt="{{.Color}}"/>
+                    <div class="value">{{.Value}}</div>
+                </div>
             {{end}}
-        </ul>
+        </div>
     </div>
     <div class="bubble" onclick="toggleView('skat')">
-        Skat
-        <ul id="skat">
+        <span>Skat</span>
+        <div class="cards" id="skat">
             {{range .Skat}}
-            <li>{{.}}</li>
+                <div class="card">
+                    <img class="card_image" src="static/svg/{{.Color}}.svg" alt="{{.Color}}"/>
+                    <div class="value">{{.Value}}</div>
+                </div>
             {{end}}
-        </ul>
+        </div>
     </div>
 </main>
 
