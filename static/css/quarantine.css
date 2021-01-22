@@ -1,7 +1,7 @@
 :root {
-    --bg-color: #FFFFFF;
-    --border-color: #ddd;
+    --background-color: #FFFFFF;
     --text-color: #000000cf;
+    --bubble-border-color: #ddd;
     --bubble-background-color: #FFFFFF;
     --bubble-hover-color: #f0f0f0;
     --card-background-color: #FFF7F0;
@@ -12,9 +12,9 @@
 
 @media screen and (prefers-color-scheme: dark) {
     :root {
-        --bg-color: #000;
-        --border-color: #333;
+        --background-color: #000;
         --text-color: #ffffff;
+        --bubble-border-color: #333;
         --bubble-background-color: #000000;
         --bubble-hover-color: #111;
         --card-background-color: #2d2b29;
@@ -29,7 +29,7 @@ html, body {
     margin: 0;
     padding: 0;
 
-    background-color: var(--bg-color);
+    background-color: var(--background-color);
     color: var(--text-color);
 
     font-family: 'Roboto Mono', monospace;
@@ -46,7 +46,7 @@ main {
 .bubble {
     min-height: 2rem;
     margin: 0 0 1rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--bubble-border-color);
     border-radius: 0.4rem;
     background-color: var(--bubble-background-color);
     display: flex;
