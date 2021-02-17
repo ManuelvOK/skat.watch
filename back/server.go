@@ -20,6 +20,9 @@ var templates = template.Must(template.ParseFiles("view/quarantine.html"))
 var colors = [...]string{"schell", "herz", "blatt", "eichel"}
 var values = [...]string{"7", "8", "9", "10", "U", "O", "K", "A"}
 
+var lastBuildYear = -1
+var lastBuildMonth = -1
+
 func viewHandler(w http.ResponseWriter, r *http.Request) {
     if r.Method == "POST" {
         player := r.FormValue("player")
@@ -62,14 +65,26 @@ func viewHandler(w http.ResponseWriter, r *http.Request) {
         if err != nil {
             http.Error(w, err.Error(), http.StatusInternalServerError)
         }
-        cmd := exec.Command("make", "index.html")
-        err = cmd.Run()
-        if err != nil {
-            http.Error(w, err.Error(), http.StatusInternalServerError)
-        }
+        rebuildMainPage(w)
+    }
+    now := time.Now()
+    if lastBuildYear != now.Year() || lastBuildMonth != int(now.Month()) {
+        rebuildMainPage(w)
     }
     p, _ := ioutil.ReadFile("index.html")
     fmt.Fprintf(w, "%s", p)
+}
+
+func rebuildMainPage(w http.ResponseWriter) {
+    cmd := exec.Command("make", "index.html")
+    err := cmd.Run()
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusInternalServerError)
+        return
+    }
+    now := time.Now()
+    lastBuildYear = now.Year()
+    lastBuildMonth = int(now.Month())
 }
 
 func serveStatic(w http.ResponseWriter, r *http.Request) {
