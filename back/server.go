@@ -93,6 +93,9 @@ func serveStatic(w http.ResponseWriter, r *http.Request) {
 }
 
 type Hands struct {
+    LastSeed    int
+    CurrentSeed int
+    NextSeed    int
     Player0 []Card
     Player1 []Card
     Player2 []Card
@@ -116,7 +119,15 @@ func quarantine(w http.ResponseWriter, r *http.Request) {
     for _, c := range game_cards {
         cards = append(cards, get_card(c))
     }
-    err := templates.ExecuteTemplate(w, "quarantine.html", Hands{cards[:10], cards[10:20], cards[20:30], cards[30:]})
+    err := templates.ExecuteTemplate(w, "quarantine.html", Hands{
+        seed - 1,
+        seed,
+        seed + 1,
+        cards[:10],
+        cards[10:20],
+        cards[20:30],
+        cards[30:],
+    })
     if err != nil {
         http.Error(w, err.Error(), http.StatusInternalServerError)
     }
