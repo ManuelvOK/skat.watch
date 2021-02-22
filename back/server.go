@@ -67,6 +67,8 @@ func viewHandler(w http.ResponseWriter, r *http.Request) {
         if err != nil {
             http.Error(w, err.Error(), http.StatusInternalServerError)
         }
+        http.Redirect(w, r, r.Header.Get("Referer"), 303)
+        return
     }
     p, _ := ioutil.ReadFile("index.html")
     fmt.Fprintf(w, "%s", p)
