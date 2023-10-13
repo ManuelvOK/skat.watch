@@ -16,6 +16,7 @@ import (
 )
 
 var templates = template.Must(template.ParseFiles("view/quarantine.html"))
+var templateReiztabelle = template.Must(template.ParseFiles("view/reiztabelle.html"))
 
 var colors = [...]string{"schell", "herz", "blatt", "eichel"}
 var values = [...]string{"7", "8", "9", "10", "U", "O", "K", "A"}
@@ -109,6 +110,10 @@ type Card struct {
 	Value string
 }
 
+type Reiz struct {
+    Meme bool
+}
+
 func quarantine(w http.ResponseWriter, r *http.Request) {
 	seed, _ := strconv.Atoi(r.FormValue("seed"))
 	rand.Seed(int64(seed))
@@ -130,6 +135,20 @@ func quarantine(w http.ResponseWriter, r *http.Request) {
 		cards[20:30],
 		cards[30:],
 	})
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func serveReiztabelle(w http.ResponseWriter, r *http.Request) {
+	err := templateReiztabelle.ExecuteTemplate(w, "reiztabelle.html", Reiz { false })
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func serveMemedReiztabelle(w http.ResponseWriter, r *http.Request) {
+	err := templateReiztabelle.ExecuteTemplate(w, "reiztabelle.html", Reiz { true })
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
@@ -159,6 +178,8 @@ func serveAPI(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", viewHandler)
 	http.HandleFunc("/quarantine", quarantine)
+	http.HandleFunc("/reiztabelle", serveReiztabelle)
+	http.HandleFunc("/reiztabelle.html", serveMemedReiztabelle)
 	http.HandleFunc("/static/", serveStatic)
 	http.HandleFunc("/api/", serveAPI)
 	log.Fatal(http.ListenAndServe(":8000", nil))
