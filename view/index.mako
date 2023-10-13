@@ -8,7 +8,7 @@
     <script src="static/js/app.js"></script>
 
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
-     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet"> 
+    <link href="static/css/fonts.css" rel="stylesheet"> 
 
     <title>skat.watch</title>
 </head>
