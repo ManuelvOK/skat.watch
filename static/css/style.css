@@ -4,6 +4,8 @@
     --text-color: #282828;
     --primary-color: #2980b9;
     --primary-text-color: #FFF;
+    --secondary-bg-color: #f0f0f0;
+    --secondary-border-color: #ccc;
     --secondary-text-color: #505050;
     --button-hover-color: #f0f0f0
 }
@@ -14,6 +16,8 @@
         --text-color: #FFF;
         --primary-color: #2980b9;
         --primary-text-color: #FFF;
+        --secondary-bg-color: #111;
+        --secondary-border-color: #444;
         --secondary-text-color: #BBB;
         --button-hover-color: #111
     }
@@ -66,7 +70,7 @@ nav button:hover {
 .dialog_wrapper {
     display: none;
     position: fixed;
-    background-color: rgba(0,0,0,0.2);
+    background-color: var(--bg-color);
 
     width: 100%;
     top: 0;
@@ -83,7 +87,6 @@ nav button:hover {
     background-color: var(--bg-color);
     border: solid 1px var(--border-color);
     border-radius: 0.2rem;
-    box-shadow: 0 0.1rem 0.4rem rgba(0,0,0,0.3);
     left: 1rem;
     width: calc(100% - 2rem);
     top: 10%;
@@ -99,7 +102,7 @@ nav button:hover {
 }
 
 .dialog-header{
-    border-bottom: solid 1px var(--border-color);
+    border-bottom: solid 1px var(--secondary-border-color);
     height: 2.5rem;
 }
 .dialog-header h3 {
@@ -142,18 +145,26 @@ nav button:hover {
 }
 
 .dialog .sub_dialog .choices div {
-    background-color: #eee;
-    border: solid 1px #aaa;
+    background-color: var(--bg-color);
+    border: solid 1px var(--border-color);
     border-radius: 0.2rem;
-    box-shadow: 0 0.1rem 0.2rem rgba(0,0,0,0.3);
     outline: none;
-
     line-height: 2rem;
     padding: 0 0.8rem;
     margin-right: 0.5rem;
     margin-bottom: 0.5rem;
     overflow: hidden;
 }
+
+.dialog .sub_dialog .choices input {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.dialog .sub_dialog .choices div:hover {
+    background-color: var(--button-hover-color);
+}
+
 .dialog .sub_dialog .choices img {
     height: 2rem;
     display: block;
@@ -185,17 +196,17 @@ nav button:hover {
     bottom: 0;
     left: 0.5rem;
     right: 0.5rem;
-    border-top: solid 1px #ccc;
+    border-top: solid 1px var(--secondary-border-color);
     padding: 0.5rem;
 }
 .dialog .button {
     float: right;
     display: none;
 
-    background-color: #eee;
-    border: solid 1px #aaa;
+    background-color: var(--bg-color);
+    border: solid 1px var(--border-color);
     border-radius: 0.2rem;
-    box-shadow: 0 0.1rem 0.2rem rgba(0,0,0,0.3);
+    --box-shadow: 0 0.1rem 0.2rem rgba(0,0,0,0.3);
     outline: none;
 
     line-height: 2rem;
@@ -204,6 +215,7 @@ nav button:hover {
 }
 .dialog .button.active {
     display: block;
+    color: var(--text-color)
 }
 
 input::-moz-focus-inner { 
